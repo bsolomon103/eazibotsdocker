@@ -11,23 +11,11 @@ services:
       - django
 
   django:
-<<<<<<< HEAD
-    image: eazibotsdjango:latest
-=======
     image: ${DOCKER_USERNAME}/eazibots:latest
->>>>>>> 3cbc5c6 (Push No 2)
     container_name: "my_django"
     ports:
       - "8080:8080"
     environment:
-      - DJANGO_SETTINGS_MODULE=aurora.settings
-<<<<<<< HEAD
-      - OPENAI_API_KEY=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
-      - SMTP_PASSWORD="@Aurora24"
-      - TEST_STRIPE_KEY=sk_test_51NJcbbD1RPWlDlnhXqjIuP8aAsbR3u08EO83FB2FHpfhG8nCgsUbD0fWolN5ifoptsh3ZZsKwOPHzHf1z4P1spU900V7doveLa
-      - REDIS_BIND_IP=0.0.0.0
-      - REDIS_PASSWORD=Aurora24
-=======
       - OPENAI_API_KEY= ${OPENAI_API_KEY}
       - SMTP_PASSWORD= ${SMTP_PASSWORD}
       - TEST_STRIPE_KEY= ${TEST_STRIPE_KEY}
@@ -35,7 +23,6 @@ services:
       - REDIS_PASSWORD= ${REDIS_PASSWORD}
       - DOCKER_USERNAME= ${DOCKER_USERNAME}
       - DOCKER_PASSWORD= ${DOCKER_PASSWORD}
->>>>>>> 3cbc5c6 (Push No 2)
     command: >
       bash -c "python manage.py migrate &&  python manage.py runserver 0.0.0.0:8080"
     depends_on:
@@ -46,33 +33,16 @@ services:
     container_name: "my_redis"
     ports:
       - 6379:6379
-<<<<<<< HEAD
-    command: redis-server --bind 0.0.0.0 --requirepass Aurora24 --port 6379
-    depends_on:
-      - postgres
-
-=======
     command: redis-server --bind 0.0.0.0 --requirepass ${REDIS_PASSWORD} --port 6379
     depends_on:
       - postgres
                     
->>>>>>> 3cbc5c6 (Push No 2)
   postgres:
     image: postgres:latest
     container_name: "my_postgres"
     environment:
-<<<<<<< HEAD
-      POSTGRES_DB: mypostgresdb
-      POSTGRES_USER: biokporsolomon88
-      POSTGRES_PASSWORD: "@Aurora24"  # Enclose the password in double quotes to avoid YAML parsing issues
-    ports:
-      - 5432:5432
-   
-=======
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
-
->>>>>>> 3cbc5c6 (Push No 2)
