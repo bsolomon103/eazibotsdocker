@@ -16,13 +16,14 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - OPENAI_API_KEY= ${OPENAI_API_KEY}
-      - SMTP_PASSWORD= ${SMTP_PASSWORD}
-      - TEST_STRIPE_KEY= ${TEST_STRIPE_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - TEST_STRIPE_KEY=${TEST_STRIPE_KEY}
       - REDIS_BIND_IP=0.0.0.0
-      - REDIS_PASSWORD= ${REDIS_PASSWORD}
-      - DOCKER_USERNAME= ${DOCKER_USERNAME}
-      - DOCKER_PASSWORD= ${DOCKER_PASSWORD}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - DOCKER_USERNAME=${DOCKER_USERNAME}
+      - DOCKER_PASSWORD=${DOCKER_PASSWORD}
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
     command: >
       bash -c "python manage.py migrate &&  python manage.py runserver 0.0.0.0:8080"
     depends_on:
@@ -46,3 +47,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
